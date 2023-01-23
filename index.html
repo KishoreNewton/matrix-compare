@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Page Title</title>
+</head>
+
+<body>
+
+  <h1>This is a Heading</h1>
+  <p>This is a paragraph.</p>
+
+</body>
+
+</html>
+<script>
+  let words = ["happy", "joyful", "content", "disappointed", "sad", "angry"];
+
+  let matrix = [];
+
+  for (let i = 0; i < words.length; i++) {
+    matrix[i] = [];
+    for (let j = 0; j < words.length; j++) {
+      matrix[i][j] = "";
+    }
+  }
+
+  for (let i = 0; i < words.length; i++) {
+    let topWord = words[i];
+    console.log(`Comparing ${topWord} against:`);
+    for (let j = 0; j < words.length; j++) {
+      let leftWord = words[j];
+      console.log(leftWord);
+      // Compare topWord against leftWord
+      // If topWord is more positive or less negative than leftWord, put a "+" in the box
+      // If less positive or more negative, give it a "-"
+      let comparison = "+";
+      if (topWord == "disappointed" || topWord == "sad" || topWord == "angry") {
+        comparison = "-";
+      }
+      if (leftWord == "disappointed" || leftWord == "sad" || leftWord == "angry") {
+        if (comparison == "-") {
+          comparison = "0";
+        }
+        else {
+          comparison = "-";
+        }
+      }
+      matrix[i][j] = comparison;
+    }
+  }
+
+  let table = document.createElement("table");
+
+  for (let i = 0; i < matrix.length; i++) {
+    let row = table.insertRow();
+    let topWordCell = row.insertCell();
+    topWordCell.innerHTML = words[i];
+    for (let j = 0; j < matrix[i].length; j++) {
+      let comparisonCell = row.insertCell();
+      comparisonCell.innerHTML = matrix[i][j];
+    }
+  }
+
+  document.body.appendChild(table);
+
+</script>
